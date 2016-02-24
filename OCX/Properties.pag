@@ -1,0 +1,188 @@
+VERSION 5.00
+Begin VB.PropertyPage Properties 
+   Caption         =   "Properties"
+   ClientHeight    =   3285
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   6870
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   3285
+   ScaleWidth      =   6870
+   Begin VB.PictureBox Picture1 
+      Height          =   3015
+      Left            =   120
+      Picture         =   "Properties.pgx":0000
+      ScaleHeight     =   2955
+      ScaleWidth      =   2085
+      TabIndex        =   14
+      Top             =   120
+      Width           =   2150
+   End
+   Begin VB.Frame Frame1 
+      Height          =   3015
+      Left            =   2400
+      TabIndex        =   0
+      Top             =   120
+      Width           =   4335
+      Begin VB.TextBox txtApplication 
+         Height          =   330
+         Left            =   120
+         TabIndex        =   7
+         Top             =   615
+         Width           =   4005
+      End
+      Begin VB.TextBox txtIP 
+         Height          =   330
+         Left            =   120
+         TabIndex        =   6
+         Top             =   1260
+         Width           =   2700
+      End
+      Begin VB.TextBox txtNode 
+         Height          =   330
+         Left            =   120
+         TabIndex        =   5
+         Top             =   1905
+         Width           =   765
+      End
+      Begin VB.TextBox txtRegister 
+         Height          =   330
+         Left            =   120
+         TabIndex        =   4
+         Top             =   2565
+         Width           =   765
+      End
+      Begin VB.TextBox txtCount 
+         Height          =   330
+         Left            =   1110
+         TabIndex        =   3
+         Top             =   1920
+         Width           =   780
+      End
+      Begin VB.TextBox txtInterval 
+         Height          =   330
+         Left            =   1110
+         TabIndex        =   2
+         Top             =   2565
+         Width           =   780
+      End
+      Begin VB.CheckBox chkEnabled 
+         Caption         =   "Enabled"
+         Height          =   285
+         Left            =   150
+         TabIndex        =   1
+         Top             =   0
+         Width           =   1020
+      End
+      Begin VB.Label lblApplication 
+         Caption         =   "Application:"
+         Height          =   240
+         Left            =   120
+         TabIndex        =   13
+         Top             =   360
+         Width           =   2700
+      End
+      Begin VB.Label lblIP 
+         Caption         =   "IP:"
+         Height          =   240
+         Left            =   120
+         TabIndex        =   12
+         Top             =   1005
+         Width           =   2700
+      End
+      Begin VB.Label lblNode 
+         Caption         =   "Node:"
+         Height          =   240
+         Left            =   120
+         TabIndex        =   11
+         Top             =   1665
+         Width           =   765
+      End
+      Begin VB.Label lblRegister 
+         Caption         =   "Register:"
+         Height          =   240
+         Left            =   120
+         TabIndex        =   10
+         Top             =   2310
+         Width           =   765
+      End
+      Begin VB.Label lblCount 
+         Caption         =   "Count:"
+         Height          =   240
+         Left            =   1110
+         TabIndex        =   9
+         Top             =   1680
+         Width           =   1500
+      End
+      Begin VB.Label lblInterval 
+         Caption         =   "Interval:"
+         Height          =   240
+         Left            =   1110
+         TabIndex        =   8
+         Top             =   2310
+         Width           =   1140
+      End
+   End
+End
+Attribute VB_Name = "Properties"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Private Sub chkEnabled_Click()
+    Changed = True
+End Sub
+
+
+Private Sub txtInterval_Change()
+    Changed = True
+End Sub
+
+
+Private Sub txtCount_Change()
+    Changed = True
+End Sub
+
+
+Private Sub txtRegister_Change()
+    Changed = True
+End Sub
+
+
+Private Sub txtNode_Change()
+    Changed = True
+End Sub
+
+
+Private Sub txtIP_Change()
+    Changed = True
+End Sub
+
+
+Private Sub txtApplication_Change()
+    Changed = True
+End Sub
+
+
+Private Sub PropertyPage_ApplyChanges()
+    SelectedControls(0).Enabled = (chkEnabled.Value = vbChecked)
+    SelectedControls(0).Interval = txtInterval.Text
+    SelectedControls(0).Count = txtCount.Text
+    SelectedControls(0).Register = txtRegister.Text
+    SelectedControls(0).Node = txtNode.Text
+    SelectedControls(0).IP = txtIP.Text
+    SelectedControls(0).Application = txtApplication.Text
+End Sub
+
+
+Private Sub PropertyPage_SelectionChanged()
+    chkEnabled.Value = (SelectedControls(0).Enabled And vbChecked)
+    txtInterval.Text = SelectedControls(0).Interval
+    txtCount.Text = SelectedControls(0).Count
+    txtRegister.Text = SelectedControls(0).Register
+    txtNode.Text = SelectedControls(0).Node
+    txtIP.Text = SelectedControls(0).IP
+    txtApplication.Text = SelectedControls(0).Application
+End Sub
+
+
