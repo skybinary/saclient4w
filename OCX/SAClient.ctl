@@ -62,6 +62,8 @@ Private p_Interval As Long
 Private p_Enabled As Boolean
 Private p_Value As String
 
+Private p_ConnectionStatus As Boolean
+
 Private statuses(7) As ColorConstants
 
 Public XHRequest As MSXML2.XMLHTTP
@@ -70,13 +72,21 @@ Private firstPass As Boolean
 Public Event OnChange(ByVal Value As String)
 
 ' properties
+Public Property Let ConnStatus(ByVal NewVal As Boolean)
+    p_ConnectionStatus = NewVal
+    PropertyChanged "ConnStatus"
+End Property
+
+Public Property Get ConnStatus() As Boolean
+    ConnStatus = p_ConnectionStatus
+End Property
+
 Public Property Let Application(ByVal NewVal As String)
     p_Application = NewVal
     PropertyChanged "Application"
 End Property
 
 Public Property Get Application() As String
-Attribute Application.VB_ProcData.VB_Invoke_Property = "Properties"
     Application = p_Application
 End Property
 
@@ -187,6 +197,8 @@ Public Sub hasResponse(ByVal response As String)
     Me.Value = response
     Timer1.Enabled = p_Enabled And Ambient.UserMode
     If Ambient.UserMode Then
+        p_ConnectionStatus = (response = "")
+ '       If response = "" Then p_ConnectionStatus = False Else p_ConnectionStatus
         Timer2.Interval = CInt(p_Interval * 0.25)
         Timer2.Enabled = True
     End If
@@ -194,7 +206,9 @@ End Sub
 
 Private Sub Timer2_Timer()
     Timer2.Enabled = False
-    If p_Enabled Then setIndicator 6
+    Dim iConStat As Integer
+    iConStat = CInt(p_ConnectionStatus) * 2
+    If p_Enabled Then setIndicator 6 + iConStat
 End Sub
 
 Private Sub UserControl_Initialize()
@@ -211,7 +225,7 @@ Private Sub UserControl_Initialize()
     statuses(1) = vbBlack ' control disabled
     statuses(2) = vbRed ' http response code 1
     statuses(3) = vbWhite ' http response code 2
-    statuses(4) = vbCyan ' http response code 3
+    statuses(4) = vbMagenta ' http response code 3
     statuses(5) = vbGreen ' http response code 4
     statuses(6) = &H80FF&    ' content in response
 End Sub
@@ -226,6 +240,7 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
         p_Interval = CLng(.ReadProperty("Interval", 5000))
         p_Enabled = CBool(.ReadProperty("Enabled", True))
         p_Value = CStr(.ReadProperty("Value", "-1"))
+        p_ConnectionStatus = CBool(.ReadProperty("ConnStatus", True))
     End With
     If firstPass = False Then
         firstPass = True
@@ -256,6 +271,7 @@ Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
         .WriteProperty "Interval", CLng(p_Interval)
         .WriteProperty "Enabled", CInt(p_Enabled)
         .WriteProperty "Value", CStr(p_Value)
+        .WriteProperty "ConnStatus", CBool(p_ConnectionStatus)
     End With
 End Sub
 

@@ -1,7 +1,7 @@
 Type=Exe
 Form=Form1.frm
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\..\WINDOWS\System32\stdole2.tlb#OLE Automation
-Object={0375EA14-9C5D-4504-91A2-526ACCD762AF}#12.0#0; SAClient.ocx
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Object={0375EA14-9C5D-4504-91A2-526ACCD762AF}#14.0#0; SAClient.ocx
 IconForm="Form1"
 Startup="Form1"
 HelpFile=""

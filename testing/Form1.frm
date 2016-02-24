@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{0375EA14-9C5D-4504-91A2-526ACCD762AF}#10.0#0"; "SAClient.ocx"
+Object = "{0375EA14-9C5D-4504-91A2-526ACCD762AF}#13.0#0"; "SAClient.ocx"
 Begin VB.Form Form1 
    Caption         =   "Form1"
    ClientHeight    =   3195
@@ -16,16 +16,16 @@ Begin VB.Form Form1
       TabIndex        =   1
       Top             =   240
       Width           =   1050
-      _ExtentX        =   1852
-      _ExtentY        =   1032
-      Application     =   "http://192.168.0.3/homework/pactivex.php"
-      IP              =   "192.168.0.3"
-      Node            =   "1"
-      Register        =   "4000"
-      Count           =   "8"
-      Interval        =   5000
-      Enabled         =   -1
-      Value           =   "-1"
+      _extentx        =   1852
+      _extenty        =   1032
+      application     =   "http://192.168.0.3/homework/pactivex.php"
+      ip              =   "192.168.0.3"
+      node            =   "1"
+      register        =   "4000"
+      count           =   "8"
+      interval        =   5000
+      enabled         =   -1
+      value           =   "-1"
    End
    Begin VB.CheckBox Check1 
       Caption         =   "Check1"
@@ -66,17 +66,19 @@ End Sub
 '
 'End Sub
 Private Sub SAClient1_OnChange(ByVal Value As String)
-    Dim anArray As Variant
-    anArray = Split(Value, ",")
-
-    Debug.Print " Count:" & CStr(anArray(0))
-    Debug.Print "Second:" & CStr(anArray(1))
-    Debug.Print "Minute:" & CStr(anArray(2))
-    Debug.Print "  Hour:" & CStr(anArray(3))
-    Debug.Print "   Day:" & CStr(anArray(4))
-    Debug.Print " Month:" & CStr(anArray(5))
-    Debug.Print "  Year:" & CStr(anArray(6))
-    Debug.Print "   ???:" & CStr(anArray(7))
-
-
+    If Value = "" Then
+        Debug.Print "Empty Response! is the server accessible?"
+    Else
+        Dim anArray As Variant
+        anArray = Split(Value, ",")
+    
+        Debug.Print " Count:" & CStr(anArray(0))
+        Debug.Print "Second:" & CStr(anArray(1))
+        Debug.Print "Minute:" & CStr(anArray(2))
+        Debug.Print "  Hour:" & CStr(anArray(3))
+        Debug.Print "   Day:" & CStr(anArray(4))
+        Debug.Print " Month:" & CStr(anArray(5))
+        Debug.Print "  Year:" & CStr(anArray(6))
+        Debug.Print "   ???:" & CStr(anArray(7))
+    End If
 End Sub
