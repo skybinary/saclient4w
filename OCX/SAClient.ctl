@@ -30,18 +30,18 @@ Begin VB.UserControl SAClient
       FillColor       =   &H00FFFFFF&
       FillStyle       =   0  'Solid
       Height          =   61
-      Left            =   60
+      Left            =   65
       Shape           =   3  'Circle
-      Top             =   30
+      Top             =   40
       Width           =   60
    End
    Begin VB.Shape Indicator 
       FillColor       =   &H000080FF&
       FillStyle       =   0  'Solid
       Height          =   128
-      Left            =   0
+      Left            =   5
       Shape           =   3  'Circle
-      Top             =   0
+      Top             =   10
       Width           =   192
    End
 End
